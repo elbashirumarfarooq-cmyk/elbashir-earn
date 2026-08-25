@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activate Withdrawal</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: #f4f7f4;
+    }
+
+    .app {
+      max-width: 430px;
+      min-height: 100vh;
+      margin: auto;
+      background: white;
+      padding: 25px;
+    }
+
+    h1 {
+      color: #08752b;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .card {
+      margin-top: 25px;
+      padding: 22px;
+      border-radius: 16px;
+      background: #eef8ef;
+      text-align: center;
+    }
+
+    .fee {
+      font-size: 32px;
+      font-weight: bold;
+      color: #08752b;
+      margin: 15px 0;
+    }
+
+    .info {
+      color: #555;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .button {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 10px;
+      background: #08752b;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .back {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #08752b;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <h1>Activate Withdrawal</h1>
+
+  <div class="card">
+
+    <div class="info">
+      Withdrawal activation requires a clearly disclosed
+      service/activation fee.
+    </div>
+
+    <div class="fee">₦2,000</div>
+
+    <div class="info">
+      Review the fee and payment terms before making any payment.
+      Payment must be verified before activation is completed.
+    </div>
+
+    <button class="button" onclick="startPayment()">
+      Continue to Payment
+    </button>
+
+  </div>
+
+  <a class="back" href="index.html">
+    ← Back to Dashboard
+  </a>
+
+</div>
+
+<script>
+function startPayment() {
+  alert(
+    "Payment setup will be added after a secure payment provider is connected."
+  );
+}
+</script>
+
+</body>
+  </html>
