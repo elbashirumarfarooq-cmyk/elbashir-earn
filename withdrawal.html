@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Withdrawal - My Reward App</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: #f4f7f4;
+    }
+
+    .app {
+      max-width: 430px;
+      min-height: 100vh;
+      margin: auto;
+      background: white;
+      padding: 25px;
+    }
+
+    h1 {
+      color: #08752b;
+      text-align: center;
+    }
+
+    .balance {
+      background: #08752b;
+      color: white;
+      padding: 20px;
+      border-radius: 16px;
+      margin-top: 25px;
+      text-align: center;
+    }
+
+    .balance h2 {
+      font-size: 30px;
+      margin: 10px 0;
+    }
+
+    .card {
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 16px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 14px;
+      margin-top: 7px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 10px;
+      background: #08752b;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .notice {
+      margin-top: 15px;
+      padding: 13px;
+      background: #fff8dc;
+      border-radius: 10px;
+      font-size: 13px;
+      color: #555;
+    }
+
+    .back {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #08752b;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <h1>Withdrawal</h1>
+
+  <div class="balance">
+    <small>Promotional Reward Balance</small>
+    <h2>₦20,000</h2>
+  </div>
+
+  <div class="notice">
+    This balance represents promotional rewards. Withdrawal
+    eligibility is subject to the app's stated terms and verification.
+  </div>
+
+  <div class="card">
+
+    <label>Bank Name</label>
+    <select id="bank">
+      <option value="">Select Bank</option>
+      <option>Access Bank</option>
+      <option>First Bank</option>
+      <option>GTBank</option>
+      <option>UBA</option>
+      <option>Zenith Bank</option>
+      <option>Opay</option>
+      <option>Moniepoint</option>
+      <option>Other</option>
+    </select>
+
+    <label>Account Number</label>
+    <input
+      type="text"
+      id="accountNumber"
+      placeholder="Enter account number"
+      maxlength="10"
+    >
+
+    <label>Amount</label>
+    <input
+      type="number"
+      id="amount"
+      placeholder="Enter withdrawal amount"
+      min="1"
+      max="20000"
+    >
+
+    <button onclick="submitWithdrawal()">
+      Request Withdrawal
+    </button>
+
+  </div>
+
+  <a class="back" href="index.html">
+    ← Back to Dashboard
+  </a>
+
+</div>
+
+<script>
+
+function submitWithdrawal() {
+
+  const bank = document.getElementById("bank").value;
+  const account = document.getElementById("accountNumber").value;
+  const amount = document.getElementById("amount").value;
+
+  if (!bank || !account || !amount) {
+    alert("Please complete all withdrawal details.");
+    return;
+  }
+
+  if (account.length !== 10) {
+    alert("Please enter a valid 10-digit account number.");
+    return;
+  }
+
+  if (amount > 20000) {
+    alert("Amount cannot exceed the displayed promotional balance.");
+    return;
+  }
+
+  alert(
+    "Withdrawal request received. Payment processing will only occur after proper verification."
+  );
+}
+
+</script>
+
+</body>
+  </html>
