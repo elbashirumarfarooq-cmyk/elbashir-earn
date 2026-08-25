@@ -123,8 +123,11 @@ function login(event) {
 
   const email = document.getElementById("email").value;
   const savedEmail = localStorage.getItem("userEmail");
-
-  if (email === savedEmail) {
+const savedPassword = localStorage.getItem("userPassword");
+  if if (
+  email === savedEmail &&
+  password === savedPassword
+) {
     alert("Login successful!");
     window.location.href = "index.html";
   } else {
