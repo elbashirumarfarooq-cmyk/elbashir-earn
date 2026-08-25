@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verify Activation</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: #f4f7f4;
+    }
+
+    .app {
+      max-width: 430px;
+      min-height: 100vh;
+      margin: auto;
+      background: white;
+      padding: 25px;
+    }
+
+    h1 {
+      color: #08752b;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .card {
+      margin-top: 25px;
+      padding: 22px;
+      border-radius: 16px;
+      background: #eef8ef;
+    }
+
+    p {
+      color: #555;
+      line-height: 1.5;
+    }
+
+    input {
+      width: 100%;
+      padding: 15px;
+      margin-top: 15px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 10px;
+      background: #08752b;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <h1>Activation Code</h1>
+
+  <div class="card">
+
+    <p>
+      Enter the activation code provided by the system after
+      your payment has been properly verified.
+    </p>
+
+    <input
+      type="text"
+      id="code"
+      placeholder="Enter activation code"
+    >
+
+    <button onclick="verifyCode()">
+      Verify Code
+    </button>
+
+  </div>
+
+</div>
+
+<script>
+
+function verifyCode() {
+
+  const code = document.getElementById("code").value.trim();
+
+  if (code === "") {
+    alert("Please enter your activation code.");
+    return;
+  }
+
+  /*
+    Demo only:
+    In the real app, the code must be verified
+    securely on the server.
+  */
+
+  if (code === "DEMO2026") {
+
+    localStorage.setItem("withdrawalActivated", "true");
+
+    alert("Activation successful!");
+
+    window.location.href = "withdrawal.html";
+
+  } else {
+
+    alert("Invalid activation code.");
+
+  }
+}
+
+</script>
+
+</body>
+</html>
