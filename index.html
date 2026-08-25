@@ -179,6 +179,19 @@
    margin-bottom:12px;">
    👤 My Account
 </a>
+  <button
+  onclick="logout()"
+  style="width:100%;
+         padding:15px;
+         border:none;
+         border-radius:12px;
+         background:#fbe9e9;
+         color:#b00020;
+         font-weight:bold;
+         margin-bottom:12px;">
+  🚪 Logout
+  </button>
+</a>
   <div class="buttons">
     <button class="activate" onclick="showActivation()">
       🔐 Activate Withdrawal
@@ -344,6 +357,14 @@ function showWithdrawal() {
 
 if (savedName) {
   document.getElementById("userName").textContent = savedName;
+  }function logout() {
+  localStorage.removeItem("userName");
+  localStorage.removeItem("userEmail");
+  localStorage.removeItem("userPhone");
+  localStorage.removeItem("userPassword");
+  localStorage.removeItem("withdrawalActivated");
+
+  window.location.href = "login.html";
   }
 
 </script>
