@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+const savedEmail = localStorage.getItem("userEmail");
+
+if (!savedEmail) {
+  window.location.href = "login.html";
+}<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
