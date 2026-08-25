@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Reward App</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f7f4;
+      color: #172017;
+    }
+
+    .app {
+      max-width: 430px;
+      margin: auto;
+      min-height: 100vh;
+      background: white;
+      padding: 20px;
+    }
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .top h2 {
+      color: #08752b;
+    }
+
+    .profile {
+      background: #eef8ef;
+      padding: 15px;
+      border-radius: 15px;
+      margin-bottom: 18px;
+    }
+
+    .profile small {
+      color: #666;
+    }
+
+    .balance {
+      background: #08752b;
+      color: white;
+      padding: 25px;
+      border-radius: 18px;
+      margin-bottom: 18px;
+    }
+
+    .balance h1 {
+      margin-top: 10px;
+      font-size: 34px;
+    }
+
+    .balance p {
+      margin-top: 8px;
+      font-size: 13px;
+    }
+
+    .notice {
+      background: #fff8dc;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    button {
+      border: none;
+      padding: 15px;
+      border-radius: 12px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .activate {
+      background: #08752b;
+      color: white;
+    }
+
+    .withdraw {
+      background: #e9f5eb;
+      color: #08752b;
+    }
+
+    .card {
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 16px;
+    }
+
+    .fee {
+      font-size: 28px;
+      color: #d62828;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      margin: 10px 0;
+    }
+
+    .full {
+      width: 100%;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <div class="top">
+    <h2>My Reward App</h2>
+    <span>🔔</span>
+  </div>
+
+  <div class="profile">
+    <small>Welcome</small>
+    <h3>ElBashir Umar Farooq</h3>
+    <small>🟢 Account Active</small>
+  </div>
+
+  <div class="balance">
+    <small>REWARD BALANCE</small>
+    <h1>₦20,000</h1>
+    <p>Promotional Reward Balance</p>
+  </div>
+
+  <div class="notice">
+    ℹ️ This is a promotional reward balance. Withdrawal eligibility
+    requires account activation according to the stated terms.
+  </div>
+
+  <div class="buttons">
+    <button class="activate" onclick="showActivation()">
+      🔐 Activate Withdrawal
+    </button>
+
+    <button class="withdraw" onclick="showWithdrawal()">
+      💸 Withdrawal
+    </button>
+  </div>
+
+  <div id="activation" class="card hidden">
+
+    <h3>Activate Withdrawal</h3>
+
+    <p style="margin-top:10px;">
+      Activation / service fee:
+    </p>
+
+    <div class="fee">₦2,000</div>
+
+    <p style="font-size:13px;color:#666;">
+      The ₦2,000 fee must be clearly displayed before payment.
+      Payment should be verified before an activation code is issued.
+    </p>
+
+    <button class="activate full" onclick="showPayment()">
+      Pay ₦2,000
+    </button>
+
+  </div>
+
+  <div id="payment" class="card hidden">
+
+    <h3>Payment Instructions</h3>
+
+    <p style="margin-top:12px;">
+      Send exactly <b>₦2,000</b> using the official payment method
+      provided by the app.
+    </p>
+
+    <p style="margin-top:12px;">
+      After payment, submit the transaction reference for verification.
+    </p>
+
+    <input
+      type="text"
+      id="reference"
+      placeholder="Transaction reference"
+    >
+
+    <button class="activate full" onclick="submitPayment()">
+      Submit Payment Reference
+    </button>
+
+  </div>
+
+  <div id="code" class="card hidden">
+
+    <h3>Enter Activation Code</h3>
+
+    <p style="margin-top:10px;">
+      Your payment has been verified. Enter the activation code provided
+      by the system.
+    </p>
+
+    <input
+      type="text"
+      id="activationCode"
+      placeholder="Enter activation code"
+    >
+
+    <button class="activate full" onclick="activateAccount()">
+      Activate Now
+    </button>
+
+  </div>
+
+  <div id="withdrawal" class="card hidden">
+
+    <h3>Withdrawal</h3>
+
+    <p style="margin-top:10px;">
+      Available reward balance:
+    </p>
+
+    <h2 style="color:#08752b;margin:10px 0;">
+      ₦20,000
+    </h2>
+
+    <input type="text" placeholder="Bank name">
+
+    <input type="text" placeholder="Account number">
+
+    <input type="number" placeholder="Withdrawal amount">
+
+    <button class="activate full">
+      Request Withdrawal
+    </button>
+
+  </div>
+
+</div>
+
+<script>
+
+function showActivation() {
+  document.getElementById("activation").classList.remove("hidden");
+  document.getElementById("payment").classList.add("hidden");
+  document.getElementById("code").classList.add("hidden");
+  document.getElementById("withdrawal").classList.add("hidden");
+}
+
+function showPayment() {
+  document.getElementById("payment").classList.remove("hidden");
+}
+
+function submitPayment() {
+
+  const reference =
+    document.getElementById("reference").value.trim();
+
+  if (reference === "") {
+    alert("Please enter your transaction reference.");
+    return;
+  }
+
+  alert("Payment reference submitted for verification.");
+
+  document.getElementById("code").classList.remove("hidden");
+}
+
+function activateAccount() {
+
+  const code =
+    document.getElementById("activationCode").value.trim();
+
+  if (code === "") {
+    alert("Please enter your activation code.");
+    return;
+  }
+
+  alert("Activation code submitted.");
+  document.getElementById("withdrawal").classList.remove("hidden");
+}
+
+function showWithdrawal() {
+  document.getElementById("withdrawal").classList.remove("hidden");
+}
+
+</script>
+
+</body>
+  </html>
