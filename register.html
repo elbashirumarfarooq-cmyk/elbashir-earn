@@ -144,7 +144,7 @@ function createAccount(event) {
   localStorage.setItem("userName", name);
   localStorage.setItem("userEmail", email);
   localStorage.setItem("userPhone", phone);
-
+localStorage.setItem("userPassword", document.getElementById("password").value);
   alert("Account created successfully!");
 
   window.location.href = "login.html";
