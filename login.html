@@ -121,20 +121,26 @@
 function login(event) {
   event.preventDefault();
 
-  const email = document.getElementById("email").value;
-  const savedEmail = localStorage.getItem("userEmail");
-const savedPassword = localStorage.getItem("userPassword");
-   else {
- if (email === savedEmail && password === savedPassword) {
-  localStorage.setItem("loggedIn", "true");
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
 
-  alert("Login successful!");
-  window.location.href = "index.html";
-} else {
-  alert("Incorrect email or password.");
-}   alert("Account not found. Please register first.");
+  const savedEmail = localStorage.getItem("userEmail");
+  const savedPassword = localStorage.getItem("userPassword");
+
+  if (!savedEmail || !savedPassword) {
+    alert("No account found. Please register first.");
+    return;
   }
-}
+
+  if (email === savedEmail && password === savedPassword) {
+    localStorage.setItem("loggedIn", "true");
+
+    alert("Login successful!");
+    window.location.href = "index.html";
+  } else {
+    alert("Incorrect email or password.");
+  }
+  }
 </script>
 
 </body>
