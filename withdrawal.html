@@ -159,7 +159,46 @@ i<!DOCTYPE html>
 
 <script>
 
-function submitWithdrawal() {const activated = localStorage.getItem("withdrawalActivated");
+function submitWithdrawal() {
+
+  const bank = document.getElementById("bank").value;
+  const account = document.getElementById("accountNumber").value;
+  const amount = document.getElementById("amount").value;
+
+  if (!bank || !account || !amount) {
+    alert("Please complete all withdrawal details.");
+    return;
+  }
+
+  if (account.length !== 10) {
+    alert("Please enter a valid 10-digit account number.");
+    return;
+  }
+
+  if (Number(amount) > 20000) {
+    alert("Amount cannot exceed the displayed balance.");
+    return;
+  }
+
+  const history = JSON.parse(
+    localStorage.getItem("withdrawalHistory") || "[]"
+  );
+
+  history.push({
+    bank: bank,
+    account: account,
+    amount: amount,
+    status: "Pending",
+    date: new Date().toLocaleString()
+  });
+
+  localStorage.setItem(
+    "withdrawalHistory",
+    JSON.stringify(history)
+  );
+
+  window.location.href = "history.html";
+    }
 
 if (activated !== "true") {
   alert("Please activate your withdrawal account first.");
