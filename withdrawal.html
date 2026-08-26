@@ -190,7 +190,24 @@ if (activated !== "true") {
     "Withdrawal request received. Payment processing will only occur after proper verification."
   );
 }
+const history = JSON.parse(
+  localStorage.getItem("withdrawalHistory") || "[]"
+);
 
+history.push({
+  bank: bank,
+  account: account,
+  amount: amount,
+  status: "Pending",
+  date: new Date().toLocaleString()
+});
+
+localStorage.setItem(
+  "withdrawalHistory",
+  JSON.stringify(history)
+);
+
+window.location.href = "history.html";
 </script>
 
 </body>
