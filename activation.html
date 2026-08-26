@@ -138,7 +138,44 @@ function startPayment() {
     return;
   }
 
+  function startPayment() {
+
+  const email = document.getElementById("email").value.trim();
+
+  if (!email) {
+    alert("Please enter your email.");
+    return;
+  }
+
+  if (typeof PaystackPop === "undefined") {
+    alert("Paystack is not loaded. Please refresh the page.");
+    return;
+  }
+
   const popup = new PaystackPop();
+
+  popup.newTransaction({
+    key: "pk_test_1d46ca8bee80942378ee5558fcbc3f9b6dc4e805
+    email: email,
+    amount: 200000,
+    currency: "NGN",
+
+    onSuccess: function(transaction) {
+      alert(
+        "Test payment successful.\nReference: " +
+        transaction.reference
+      );
+
+      window.location.href =
+        "verify.html?reference=" +
+        encodeURIComponent(transaction.reference);
+    },
+
+    onCancel: function() {
+      alert("Payment cancelled.");
+    }
+  });
+  }
 
   popup.newTransaction({
 
