@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>My Account</title>
+  <title>Activate Withdrawal</title>
+
+  <script src="https://js.paystack.co/v2/inline.js"></script>
 
   <style>
     * {
@@ -26,55 +28,53 @@
     }
 
     h1 {
-      text-align: center;
       color: #08752b;
-    }
-
-    .profile {
       text-align: center;
+      margin-top: 35px;
+    }
+
+    .card {
+      margin-top: 25px;
+      padding: 22px;
       background: #eef8ef;
-      padding: 25px;
       border-radius: 16px;
-      margin-top: 20px;
+      text-align: center;
     }
 
-    .avatar {
-      font-size: 55px;
-    }
-
-    .name {
-      font-size: 23px;
+    .amount {
+      font-size: 32px;
       font-weight: bold;
+      color: #08752b;
+      margin: 20px 0;
+    }
+
+    input {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
       margin-top: 10px;
     }
 
-    .status {
-      color: #08752b;
-      margin-top: 8px;
-    }
-
-    .item {
-      margin-top: 15px;
-      padding: 16px;
-      background: #f7f7f7;
+    button {
+      width: 100%;
+      padding: 15px;
+      margin-top: 18px;
+      border: none;
       border-radius: 10px;
-    }
-
-    .item strong {
-      display: block;
-      margin-bottom: 5px;
+      background: #08752b;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
     }
 
     .back {
       display: block;
       text-align: center;
-      margin-top: 25px;
-      padding: 14px;
-      background: #08752b;
-      color: white;
+      margin-top: 20px;
+      color: #08752b;
       text-decoration: none;
-      border-radius: 10px;
-      font-weight: bold;
     }
   </style>
 </head>
@@ -83,46 +83,94 @@
 
 <div class="app">
 
-  <h1>👤 My Account</h1>
+  <h1>🔐 Activate Withdrawal</h1>
 
-  <div class="profile">
+  <div class="card">
 
-    <div class="avatar">👤</div>
+    <p>Activation fee</p>
 
-    <div class="name">
-      ElBashir Umar Farooq
+    <div class="amount">
+      ₦2,000
     </div>
 
-    <div class="status">
-      🟢 Account Active
-    </div>
+    <input
+      type="email"
+      id="email"
+      placeholder="Enter your email"
+    >
+
+    <button onclick="payNow()">
+      💳 Pay ₦2,000
+    </button>
 
   </div>
-
-  <div class="item">
-    <strong>💰 Reward Balance</strong>
-    ₦20,000
-  </div>
-
-  <div class="item">
-    <strong>🔐 Withdrawal Status</strong>
-    Available for demo withdrawal
-  </div>
-
-  <div class="item">
-    <strong>📋 Transaction History</strong>
-    View your withdrawal requests from the History page.
-  </div>
-
-  <a href="history.html" class="back">
-    📋 View History
-  </a>
 
   <a href="index.html" class="back">
     ← Back to Dashboard
   </a>
 
 </div>
+
+<script>
+
+function payNow() {
+
+  const email =
+    document.getElementById("email").value.trim();
+
+  if (!email) {
+    alert("Please enter your email.");
+    return;
+  }
+
+  const popup = new Paystack();
+
+  popup.checkout({
+
+    key: "pk_test_1d46ca8bee80942378ee5558fcbc3f9b6dc4e805
+
+    email: email,
+
+    amount: 200000,
+
+    currency: "NGN",
+
+    onSuccess: function(transaction) {
+
+      /*
+       * TEST ONLY.
+       * Do not treat this frontend callback as
+       * proof of payment in a production app.
+       */
+
+      alert(
+        "Payment completed in test mode. Reference: " +
+        transaction.reference
+      );
+
+      window.location.href = "verify.html";
+    },
+
+    onCancel: function() {
+
+      alert("Payment cancelled.");
+
+    },
+
+    onError: function(error) {
+
+      alert(
+        "Payment error: " +
+        error.message
+      );
+
+    }
+
+  });
+
+}
+
+</script>
 
 </body>
   </html>
