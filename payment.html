@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Payment Details</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: #f4f7f4;
+    }
+
+    .app {
+      max-width: 430px;
+      min-height: 100vh;
+      margin: auto;
+      background: white;
+      padding: 25px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #08752b;
+      margin-top: 30px;
+    }
+
+    .card {
+      margin-top: 25px;
+      padding: 22px;
+      border-radius: 16px;
+      background: #eef8ef;
+    }
+
+    .amount {
+      text-align: center;
+      font-size: 32px;
+      font-weight: bold;
+      color: #08752b;
+      margin: 20px 0;
+    }
+
+    .detail {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 12px;
+    }
+
+    .label {
+      color: #777;
+      font-size: 13px;
+      margin-bottom: 5px;
+    }
+
+    .value {
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    .copy {
+      width: 100%;
+      margin-top: 10px;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #08752b;
+      color: white;
+      font-weight: bold;
+    }
+
+    .paid {
+      width: 100%;
+      margin-top: 20px;
+      padding: 16px;
+      border: none;
+      border-radius: 10px;
+      background: #08752b;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .notice {
+      margin-top: 18px;
+      padding: 13px;
+      background: #fff5cc;
+      border-radius: 10px;
+      color: #665500;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .back {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #08752b;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <h1>💳 Payment Details</h1>
+
+  <div class="card">
+
+    <div class="amount">
+      ₦2,000
+    </div>
+
+    <div class="detail">
+      <div class="label">Account Name</div>
+      <div class="value">Bashar Umar</div>
+    </div>
+
+    <div class="detail">
+      <div class="label">Bank</div>
+      <div class="value">Moniepoint MFB</div>
+    </div>
+
+    <div class="detail">
+      <div class="label">Account Number</div>
+      <div class="value" id="accountNumber">
+        5982626313
+      </div>
+
+      <button class="copy" onclick="copyAccount()">
+        📋 Copy Account Number
+      </button>
+    </div>
+
+    <button class="paid" onclick="paymentSubmitted()">
+      ✅ I Have Made Payment
+    </button>
+
+    <div class="notice">
+      After making payment, your request will remain
+      <strong>Pending</strong> until the payment is actually verified.
+    </div>
+
+  </div>
+
+  <a href="index.html" class="back">
+    ← Back to Dashboard
+  </a>
+
+</div>
+
+<script>
+
+function copyAccount() {
+
+  const account =
+    document.getElementById("accountNumber").textContent.trim();
+
+  navigator.clipboard.writeText(account)
+    .then(function() {
+
+      alert("Account number copied successfully.");
+
+    })
+    .catch(function() {
+
+      alert("Please copy the account number manually: " + account);
+
+    });
+}
+
+
+function paymentSubmitted() {
+
+  localStorage.setItem(
+    "paymentStatus",
+    "Pending"
+  );
+
+  alert(
+    "Payment submitted. Your payment is pending verification."
+  );
+
+  window.location.href =
+    "verify.html";
+
+}
+
+</script>
+
+</body>
+  </html>
