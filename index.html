@@ -128,18 +128,6 @@
       width: 100%;
       margin-top: 10px;
     }
-
-    .account-details {
-      background: #eef8ef;
-      padding: 18px;
-      border-radius: 12px;
-      margin-top: 15px;
-      line-height: 1.8;
-    }
-
-    .account-details strong {
-      color: #08752b;
-    }
   </style>
 </head>
 
@@ -191,6 +179,7 @@
 
     <p style="font-size:13px;color:#666;">
       The ₦2,000 fee must be clearly displayed before payment.
+      Payment should be verified before an activation code is issued.
     </p>
 
     <button class="activate full" onclick="showPayment()">
@@ -204,28 +193,12 @@
     <h3>Payment Instructions</h3>
 
     <p style="margin-top:12px;">
-      Send exactly <b>₦2,000</b> to the account details below.
+      Send exactly <b>₦2,000</b> using the official payment method
+      provided by the app.
     </p>
 
-    <div class="account-details">
-
-      <strong>Account Name:</strong><br>
-      Bashar Umar
-
-      <br><br>
-
-      <strong>Account Number:</strong><br>
-      5982626313
-
-      <br><br>
-
-      <strong>Bank:</strong><br>
-      Moniepoint MFB
-
-    </div>
-
-    <p style="margin-top:12px;font-size:13px;color:#666;">
-      After making the transfer, enter your transaction reference.
+    <p style="margin-top:12px;">
+      After payment, submit the transaction reference for verification.
     </p>
 
     <input
@@ -245,7 +218,8 @@
     <h3>Enter Activation Code</h3>
 
     <p style="margin-top:10px;">
-      Enter the activation code provided after payment verification.
+      Your payment has been verified. Enter the activation code provided
+      by the system.
     </p>
 
     <input
@@ -257,36 +231,6 @@
     <button class="activate full" onclick="activateAccount()">
       Activate Now
     </button>
-
-    <div id="accountAfterActivation" class="hidden">
-
-      <div class="account-details">
-
-        <h3 style="margin-bottom:10px;">
-          💳 Payment Account
-        </h3>
-
-        <strong>Amount:</strong><br>
-        ₦2,000
-
-        <br><br>
-
-        <strong>Account Name:</strong><br>
-        Bashar Umar
-
-        <br><br>
-
-        <strong>Account Number:</strong><br>
-        5982626313
-
-        <br><br>
-
-        <strong>Bank:</strong><br>
-        Moniepoint MFB
-
-      </div>
-
-    </div>
 
   </div>
 
@@ -318,90 +262,51 @@
 
 <script>
 
-const ACTIVATION_CODE =
-"ELBASHIR-2026-UMAR-FAROQ-84721";
-
-
 function showActivation() {
-
-  document.getElementById("activation")
-    .classList.remove("hidden");
-
-  document.getElementById("payment")
-    .classList.add("hidden");
-
-  document.getElementById("code")
-    .classList.add("hidden");
-
-  document.getElementById("withdrawal")
-    .classList.add("hidden");
+  document.getElementById("activation").classList.remove("hidden");
+  document.getElementById("payment").classList.add("hidden");
+  document.getElementById("code").classList.add("hidden");
+  document.getElementById("withdrawal").classList.add("hidden");
 }
-
 
 function showPayment() {
-
-  document.getElementById("payment")
-    .classList.remove("hidden");
-
+  document.getElementById("payment").classList.remove("hidden");
 }
-
 
 function submitPayment() {
 
   const reference =
-    document.getElementById("reference")
-    .value.trim();
+    document.getElementById("reference").value.trim();
 
   if (reference === "") {
-
     alert("Please enter your transaction reference.");
-
     return;
   }
 
   alert("Payment reference submitted for verification.");
 
-  document.getElementById("code")
-    .classList.remove("hidden");
+  document.getElementById("code").classList.remove("hidden");
 }
-
 
 function activateAccount() {
 
   const code =
-    document.getElementById("activationCode")
-    .value.trim();
+    document.getElementById("activationCode").value.trim();
 
   if (code === "") {
-
     alert("Please enter your activation code.");
-
     return;
   }
 
-  if (code !== ACTIVATION_CODE) {
-
-    alert("Invalid activation code.");
-
-    return;
-  }
-
-  alert("Activation successful.");
-
-  document.getElementById("accountAfterActivation")
-    .classList.remove("hidden");
-
+  alert("Activation code submitted.");
+  document.getElementById("withdrawal").classList.remove("hidden");
 }
 
-
 function showWithdrawal() {
-
-  document.getElementById("withdrawal")
-    .classList.remove("hidden");
-
+  document.getElementById("withdrawal").classList.remove("hidden");
 }
 
 </script>
 
 </body>
-  </html>
+      </html>
