@@ -99,9 +99,9 @@
       placeholder="Enter your email"
     >
 
-    <button onclick="payNow()">
-      💳 Pay ₦2,000
-    </button>
+  <button type="button" id="payButton">
+  💳 Continue to Payment
+  </button>
 
   </div>
 
@@ -169,7 +169,48 @@ function payNow() {
   });
 
 }
+<script>
+document.getElementById("payButton").addEventListener("click", function () {
 
+  const email = document.getElementById("email").value.trim();
+
+  if (!email) {
+    alert("Please enter your email.");
+    return;
+  }
+
+  if (typeof PaystackPop === "undefined") {
+    alert("Paystack library did not load.");
+    return;
+  }
+
+  const popup = new PaystackPop();
+
+  popup.newTransaction({
+    key: "pk_test_1d46ca8bee80942378ee5558fcbc3f9b6dc4e805",
+    email: email,
+    amount: 200000,
+    currency: "NGN",
+
+    onLoad: function () {
+      console.log("Paystack checkout loaded");
+    },
+
+    onSuccess: function (transaction) {
+      alert("Test payment successful: " + transaction.reference);
+    },
+
+    onCancel: function () {
+      alert("Payment cancelled");
+    },
+
+    onError: function (error) {
+      alert("Paystack error: " + error.message);
+    }
+  });
+
+});
+</script>
 </script>
 
 </body>
