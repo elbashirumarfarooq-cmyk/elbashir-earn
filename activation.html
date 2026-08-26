@@ -1,33 +1,130 @@
-<script src="https://js.paystack.co/v2/inline.js"></script><script>
-function startPayment() {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  const email = document.getElementById("email").value.trim();
+  <title>Activate Withdrawal</title>
 
-  if (!email) {
-    alert("Please enter your email.");
-    return;
-  }
-
-  if (typeof PaystackPop === "undefined") {
-    alert("Paystack has not loaded. Refresh the page and try again.");
-    return;
-  }
-
-  const paystack = new PaystackPop();
-
-  paystack.newTransaction({
-    key: "pk_test_1d46ca8bee80942378ee5558fcbc3f9b6dc4e805",
-    email: email,
-    amount: 200000,
-    currency: "NGN",
-
-    onSuccess: function(transaction) {
-      alert("Test payment successful: " + transaction.reference);
-    },
-
-    onCancel: function() {
-      alert("Payment cancelled.");
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
     }
-  });
+
+    body {
+      margin: 0;
+      background: #f4f7f4;
+    }
+
+    .app {
+      max-width: 430px;
+      min-height: 100vh;
+      margin: auto;
+      background: white;
+      padding: 25px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #08752b;
+      margin-top: 30px;
+    }
+
+    .card {
+      margin-top: 25px;
+      padding: 24px;
+      border-radius: 16px;
+      background: #eef8ef;
+      text-align: center;
+    }
+
+    .icon {
+      font-size: 50px;
+    }
+
+    .fee {
+      font-size: 34px;
+      font-weight: bold;
+      color: #08752b;
+      margin: 18px 0;
+    }
+
+    .info {
+      color: #555;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .pay {
+      width: 100%;
+      padding: 16px;
+      margin-top: 22px;
+      border: none;
+      border-radius: 10px;
+      background: #08752b;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .back {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #08752b;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <h1>🔐 Activate Withdrawal</h1>
+
+  <div class="card">
+
+    <div class="icon">💳</div>
+
+    <div class="info">
+      Withdrawal activation requires an activation fee of:
+    </div>
+
+    <div class="fee">
+      ₦2,000
+    </div>
+
+    <div class="info">
+      Review the payment details before making your payment.
+      Your activation will remain pending until the payment
+      has been verified.
+    </div>
+
+    <button class="pay" onclick="goToPayment()">
+      💳 Continue to Payment
+    </button>
+
+  </div>
+
+  <a href="index.html" class="back">
+    ← Back to Dashboard
+  </a>
+
+</div>
+
+<script>
+
+function goToPayment() {
+
+  window.location.href = "payment.html";
+
 }
-    </script>
+
+</script>
+
+</body>
+  </html>
