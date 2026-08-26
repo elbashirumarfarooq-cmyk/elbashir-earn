@@ -1,8 +1,9 @@
-i<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Withdrawal - My Reward App</title>
 
   <style>
@@ -21,32 +22,35 @@ i<!DOCTYPE html>
       min-height: 100vh;
       margin: auto;
       background: white;
-      padding: 25px;
+      padding: 22px;
     }
 
     h1 {
-      color: #08752b;
       text-align: center;
+      color: #08752b;
+      margin-top: 20px;
     }
 
     .balance {
       background: #08752b;
       color: white;
-      padding: 20px;
+      padding: 22px;
       border-radius: 16px;
-      margin-top: 25px;
-      text-align: center;
+      margin: 20px 0;
     }
 
-    .balance h2 {
-      font-size: 30px;
-      margin: 10px 0;
+    .balance small {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .balance strong {
+      font-size: 32px;
     }
 
     .card {
-      margin-top: 20px;
+      background: #eef8ef;
       padding: 20px;
-      border: 1px solid #ddd;
       border-radius: 16px;
     }
 
@@ -54,6 +58,7 @@ i<!DOCTYPE html>
       display: block;
       margin-top: 15px;
       font-weight: bold;
+      color: #333;
     }
 
     input,
@@ -63,36 +68,40 @@ i<!DOCTYPE html>
       margin-top: 7px;
       border: 1px solid #ccc;
       border-radius: 10px;
+      background: white;
       font-size: 16px;
     }
 
     button {
       width: 100%;
       padding: 15px;
-      margin-top: 20px;
+      margin-top: 22px;
       border: none;
       border-radius: 10px;
       background: #08752b;
       color: white;
-      font-weight: bold;
       font-size: 16px;
-    }
-
-    .notice {
-      margin-top: 15px;
-      padding: 13px;
-      background: #fff8dc;
-      border-radius: 10px;
-      font-size: 13px;
-      color: #555;
+      font-weight: bold;
     }
 
     .back {
       display: block;
       text-align: center;
-      margin-top: 20px;
+      margin-top: 15px;
+      padding: 14px;
       color: #08752b;
       text-decoration: none;
+      font-weight: bold;
+    }
+
+    .demo {
+      margin-top: 18px;
+      padding: 13px;
+      border-radius: 10px;
+      background: #fff5cc;
+      color: #665500;
+      font-size: 13px;
+      line-height: 1.5;
     }
   </style>
 </head>
@@ -101,154 +110,210 @@ i<!DOCTYPE html>
 
 <div class="app">
 
-  <h1>Withdrawal</h1>
+  <h1>💸 Withdrawal</h1>
 
   <div class="balance">
-    <small>Promotional Reward Balance</small>
-    <h2>₦20,000</h2>
-  </div>
-
-  <div class="notice">
-    This balance represents promotional rewards. Withdrawal
-    eligibility is subject to the app's stated terms and verification.
+    <small>Available Demo Balance</small>
+    <strong>₦20,000</strong>
   </div>
 
   <div class="card">
 
-    <label>Bank Name</label>
+    <label for="bank">Bank</label>
+
     <select id="bank">
-      <option value="">Select Bank</option>
-      <option>Access Bank</option>
-      <option>First Bank</option>
-      <option>GTBank</option>
-      <option>UBA</option>
-      <option>Zenith Bank</option>
-      <option>Opay</option>
-      <option>Moniepoint</option>
-      <option>Other</option>
+      <option value="">Select your bank</option>
+      <option value="Access Bank">Access Bank</option>
+      <option value="First Bank">First Bank</option>
+      <option value="GTBank">GTBank</option>
+      <option value="UBA">UBA</option>
+      <option value="Zenith Bank">Zenith Bank</option>
+      <option value="OPay">OPay</option>
+      <option value="PalmPay">PalmPay</option>
     </select>
 
-    <label>Account Number</label>
+
+    <label for="accountNumber">
+      Account Number
+    </label>
+
     <input
       type="text"
       id="accountNumber"
-      placeholder="Enter account number"
+      inputmode="numeric"
       maxlength="10"
+      placeholder="Enter 10-digit account number"
     >
 
-    <label>Amount</label>
+
+    <label for="amount">
+      Withdrawal Amount
+    </label>
+
     <input
       type="number"
       id="amount"
-      placeholder="Enter withdrawal amount"
-      min="1"
+      min="100"
       max="20000"
+      placeholder="Enter amount"
     >
 
-    <button onclick="submitWithdrawal()">
-      Request Withdrawal
+
+    <button type="button" onclick="submitWithdrawal()">
+      💸 Request Withdrawal
     </button>
 
   </div>
 
-  <a class="back" href="index.html">
+
+  <div class="demo">
+    ⚠️ <strong>Demo Mode:</strong>
+    This page only records a sample withdrawal request
+    in this browser. It does not send money to a bank account.
+  </div>
+
+
+  <a href="history.html" class="back">
+    📋 View Transaction History
+  </a>
+
+  <a href="index.html" class="back">
     ← Back to Dashboard
   </a>
 
 </div>
 
+
 <script>
 
 function submitWithdrawal() {
 
-  const bank = document.getElementById("bank").value;
-  const account = document.getElementById("accountNumber").value;
-  const amount = document.getElementById("amount").value;
+  /*
+   * Check activation
+   */
+  const activated =
+    localStorage.getItem("withdrawalActivated");
 
-  if (!bank || !account || !amount) {
-    alert("Please complete all withdrawal details.");
+  if (activated !== "true") {
+
+    alert(
+      "Please activate your withdrawal account first."
+    );
+
+    window.location.href = "activation.html";
+
     return;
   }
 
-  if (account.length !== 10) {
-    alert("Please enter a valid 10-digit account number.");
+
+  /*
+   * Get form values
+   */
+  const bank =
+    document.getElementById("bank").value;
+
+  const account =
+    document.getElementById("accountNumber").value.trim();
+
+  const amount =
+    Number(document.getElementById("amount").value);
+
+
+  /*
+   * Validate bank
+   */
+  if (!bank) {
+
+    alert("Please select your bank.");
+
     return;
   }
 
-  if (Number(amount) > 20000) {
-    alert("Amount cannot exceed the displayed balance.");
+
+  /*
+   * Validate account number
+   */
+  if (!/^\d{10}$/.test(account)) {
+
+    alert(
+      "Please enter a valid 10-digit account number."
+    );
+
     return;
   }
 
-  const history = JSON.parse(
-    localStorage.getItem("withdrawalHistory") || "[]"
-  );
 
+  /*
+   * Validate amount
+   */
+  if (!amount || amount < 100 || amount > 20000) {
+
+    alert(
+      "Enter an amount between ₦100 and ₦20,000."
+    );
+
+    return;
+  }
+
+
+  /*
+   * Get existing history
+   */
+  let history = [];
+
+  try {
+
+    history = JSON.parse(
+      localStorage.getItem(
+        "withdrawalHistory"
+      ) || "[]"
+    );
+
+  } catch (error) {
+
+    history = [];
+
+  }
+
+
+  /*
+   * Add demo withdrawal
+   */
   history.push({
+
     bank: bank,
+
     account: account,
+
     amount: amount,
+
     status: "Pending",
+
     date: new Date().toLocaleString()
+
   });
 
+
+  /*
+   * Save history
+   */
   localStorage.setItem(
     "withdrawalHistory",
     JSON.stringify(history)
   );
 
-  window.location.href = "history.html";
-    }
 
-if (activated !== "true") {
-  alert("Please activate your withdrawal account first.");
-  window.location.href = "activation.html";
-  return;
-      }
-
-  const bank = document.getElementById("bank").value;
-  const account = document.getElementById("accountNumber").value;
-  const amount = document.getElementById("amount").value;
-
-  if (!bank || !account || !amount) {
-    alert("Please complete all withdrawal details.");
-    return;
-  }
-
-  if (account.length !== 10) {
-    alert("Please enter a valid 10-digit account number.");
-    return;
-  }
-
-  if (amount > 20000) {
-    alert("Amount cannot exceed the displayed promotional balance.");
-    return;
-  }
-
+  /*
+   * Open history
+   */
   alert(
-    "Withdrawal request received. Payment processing will only occur after proper verification."
+    "Demo withdrawal request recorded successfully."
   );
+
+  window.location.href = "history.html";
 }
-const history = JSON.parse(
-  localStorage.getItem("withdrawalHistory") || "[]"
-);
 
-history.push({
-  bank: bank,
-  account: account,
-  amount: amount,
-  status: "Pending",
-  date: new Date().toLocaleString()
-});
-
-localStorage.setItem(
-  "withdrawalHistory",
-  JSON.stringify(history)
-);
-
-window.location.href = "history.html";
-}
 </script>
 
 </body>
-  </html>
+        </html>
