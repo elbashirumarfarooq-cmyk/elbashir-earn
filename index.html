@@ -3,131 +3,177 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Registration & Activation</title>
+<title>Account Activation</title>
 
 <style>
+*{box-sizing:border-box}
+
 body{
   margin:0;
   font-family:Arial,sans-serif;
-  background:#f2f4f7;
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+  min-height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  min-height:100vh;
 }
-.container{
-  width:90%;
-  max-width:420px;
-  background:white;
-  padding:25px;
-  border-radius:15px;
-  box-shadow:0 5px 20px #ccc;
+
+.card{
+  width:92%;
+  max-width:430px;
+  background:#fff;
+  padding:28px;
+  border-radius:20px;
+  box-shadow:0 15px 40px rgba(0,0,0,.25);
 }
-h2{text-align:center}
-input{
-  width:100%;
-  padding:14px;
-  margin:8px 0;
-  border:1px solid #ddd;
-  border-radius:8px;
-  box-sizing:border-box;
-}
-button{
-  width:100%;
-  padding:14px;
-  margin-top:10px;
-  border:0;
-  border-radius:8px;
-  background:#111;
-  color:white;
-  font-size:16px;
-}
+
 .page{display:none}
 .page.active{display:block}
-.details{
-  background:#f5f5f5;
-  padding:18px;
-  border-radius:10px;
-  line-height:2;
-  margin-top:15px;
+
+h1{
+  text-align:center;
+  margin-bottom:10px;
 }
+
+p{
+  text-align:center;
+  color:#666;
+}
+
+input{
+  width:100%;
+  padding:15px;
+  margin:8px 0;
+  border:1px solid #ddd;
+  border-radius:10px;
+  font-size:16px;
+}
+
+button{
+  width:100%;
+  padding:15px;
+  margin-top:12px;
+  border:0;
+  border-radius:10px;
+  background:#111827;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
+
 .amount{
   text-align:center;
-  font-size:28px;
+  font-size:32px;
   font-weight:bold;
+  margin:20px 0;
 }
+
+.details{
+  background:#f1f5f9;
+  padding:20px;
+  border-radius:12px;
+  line-height:2;
+  font-size:16px;
+}
+
 .error{
   color:red;
   text-align:center;
-  margin-top:10px;
+  margin-top:12px;
+}
+
+.success{
+  display:none;
+  color:green;
+  text-align:center;
+  margin-top:15px;
+  font-weight:bold;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="card">
 
 <!-- REGISTER -->
 <div id="register" class="page active">
-<h2>📝 Register</h2>
+
+<h1>📝 Create Account</h1>
+<p>Register to continue</p>
 
 <input id="name" type="text" placeholder="Full Name">
-<input id="email" type="email" placeholder="Email">
+
+<input id="email" type="email" placeholder="Email Address">
+
 <input id="password" type="password" placeholder="Password">
 
-<button onclick="register()">Register</button>
+<button onclick="registerUser()">
+Register
+</button>
+
 </div>
 
 
 <!-- ACTIVATION -->
 <div id="activation" class="page">
-<h2>🔐 Activation</h2>
 
-<p style="text-align:center">
-Enter your activation code
-</p>
+<h1>🔐 Activation</h1>
+<p>Enter your activation code</p>
 
-<input id="activationCode"
-       type="text"
-       placeholder="Activation Code">
+<input
+id="activationCode"
+type="text"
+placeholder="Activation Code">
 
-<button onclick="activate()">Continue</button>
+<button onclick="checkCode()">
+Activate
+</button>
 
 <div id="error" class="error"></div>
+
 </div>
 
 
-<!-- PAYMENT DETAILS -->
+<!-- PAYMENT -->
 <div id="payment" class="page">
 
-<h2>💳 Payment Details</h2>
+<h1>💳 Payment</h1>
 
-<div class="amount">₦2,000</div>
+<p>Activation successful</p>
+
+<div class="amount">
+₦2,000
+</div>
 
 <div class="details">
+
 <b>Account Name:</b><br>
-Bashar Umar<br>
+Bashar Umar
+
+<br>
 
 <b>Account Number:</b><br>
-5982626313<br>
+5982626313
+
+<br>
 
 <b>Bank:</b><br>
 Moniepoint MFB
+
 </div>
 
-<p style="text-align:center">
-Please transfer exactly ₦2,000 to the account above.
+<p>
+Please transfer exactly ₦2,000 to the account details above.
 </p>
 
 <button onclick="confirmPayment()">
 I Have Paid
 </button>
 
-<p id="confirmed"
-   style="display:none;color:green;text-align:center">
+<div id="success" class="success">
 ✅ Payment submitted successfully.
-</p>
+</div>
 
 </div>
 
@@ -142,60 +188,71 @@ const ACTIVATION_CODE =
 
 function showPage(page){
 
-  document.querySelectorAll(".page")
-  .forEach(p => p.classList.remove("active"));
+document
+.querySelectorAll(".page")
+.forEach(function(p){
+p.classList.remove("active");
+});
 
-  document.getElementById(page)
-  .classList.add("active");
+document
+.getElementById(page)
+.classList.add("active");
+
 }
 
 
-function register(){
+function registerUser(){
 
-  const name =
-    document.getElementById("name").value.trim();
+const name =
+document.getElementById("name").value.trim();
 
-  const email =
-    document.getElementById("email").value.trim();
+const email =
+document.getElementById("email").value.trim();
 
-  const password =
-    document.getElementById("password").value;
+const password =
+document.getElementById("password").value;
 
-  if(!name || !email || !password){
+if(!name || !email || !password){
 
-    alert("Please complete all fields.");
+alert("Please complete all registration fields.");
 
-    return;
-  }
+return;
 
-  showPage("activation");
+}
+
+showPage("activation");
+
 }
 
 
-function activate(){
+function checkCode(){
 
-  const code =
-    document.getElementById("activationCode")
-    .value.trim();
+const code =
+document
+.getElementById("activationCode")
+.value.trim();
 
-  if(code === ACTIVATION_CODE){
+if(code === ACTIVATION_CODE){
 
-    showPage("payment");
+document.getElementById("error").textContent="";
 
-  }else{
+showPage("payment");
 
-    document.getElementById("error")
-    .textContent =
-    "Invalid activation code. Please try again.";
+}else{
 
-  }
+document.getElementById("error").textContent =
+"Invalid activation code.";
+
+}
+
 }
 
 
 function confirmPayment(){
 
-  document.getElementById("confirmed")
-  .style.display="block";
+document
+.getElementById("success")
+.style.display="block";
 
 }
 
