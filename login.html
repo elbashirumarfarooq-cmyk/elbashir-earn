@@ -127,21 +127,13 @@ function login(event) {
   const savedEmail = localStorage.getItem("userEmail");
   const savedPassword = localStorage.getItem("userPassword");
 
-  if (!savedEmail || !savedPassword) {
-    alert("No account found. Please register first.");
-    return;
-  }
-
   if (email === savedEmail && password === savedPassword) {
     localStorage.setItem("loggedIn", "true");
-
-    alert("Login successful!");
     window.location.href = "index.html";
   } else {
     alert("Incorrect email or password.");
   }
-  }
-</script>
+}ooscript>
 
 </body>
 </html>
