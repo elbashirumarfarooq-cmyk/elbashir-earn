@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transaction History</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: #f4f7f4;
+    }
+
+    .app {
+      max-width: 430px;
+      min-height: 100vh;
+      margin: auto;
+      background: white;
+      padding: 25px;
+    }
+
+    h1 {
+      color: #08752b;
+      text-align: center;
+    }
+
+    .empty {
+      margin-top: 30px;
+      padding: 30px 20px;
+      text-align: center;
+      background: #eef8ef;
+      border-radius: 16px;
+      color: #666;
+    }
+
+    .back {
+      display: block;
+      margin-top: 20px;
+      padding: 14px;
+      text-align: center;
+      background: #08752b;
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <h1>Transaction History</h1>
+
+  <div id="history" class="empty">
+    No withdrawal requests yet.
+  </div>
+
+  <a href="index.html" class="back">
+    ← Back to Dashboard
+  </a>
+
+</div>
+
+<script>
+
+const history = JSON.parse(
+  localStorage.getItem("withdrawalHistory") || "[]"
+);
+
+const box = document.getElementById("history");
+
+if (history.length > 0) {
+
+  box.innerHTML = "";
+
+  history.forEach(function(item) {
+
+    const row = document.createElement("div");
+
+    row.style.padding = "15px";
+    row.style.marginBottom = "10px";
+    row.style.background = "#eef8ef";
+    row.style.borderRadius = "10px";
+
+    row.innerHTML = `
+      <strong>₦${item.amount}</strong><br>
+      ${item.bank}<br>
+      Account: ${item.account}<br>
+      <small>Status: ${item.status}</small>
+    `;
+
+    box.appendChild(row);
+
+  });
+
+}
+
+</script>
+
+</body>
+  </html>
