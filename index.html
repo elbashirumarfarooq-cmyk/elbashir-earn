@@ -1,184 +1,320 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Account Activation</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Reward App</title>
 
-<style>
-*{box-sizing:border-box}
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
 
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:linear-gradient(135deg,#0f172a,#1e293b);
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
+    body {
+      background: #f4f7f4;
+      color: #172017;
+    }
 
-.card{
-  width:92%;
-  max-width:430px;
-  background:#fff;
-  padding:28px;
-  border-radius:20px;
-  box-shadow:0 15px 40px rgba(0,0,0,.25);
-}
+    .app {
+      max-width: 430px;
+      margin: auto;
+      min-height: 100vh;
+      background: white;
+      padding: 20px;
+    }
 
-.page{display:none}
-.page.active{display:block}
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+    }
 
-h1{
-  text-align:center;
-  margin-bottom:10px;
-}
+    .top h2 {
+      color: #08752b;
+    }
 
-p{
-  text-align:center;
-  color:#666;
-}
+    .profile {
+      background: #eef8ef;
+      padding: 15px;
+      border-radius: 15px;
+      margin-bottom: 18px;
+    }
 
-input{
-  width:100%;
-  padding:15px;
-  margin:8px 0;
-  border:1px solid #ddd;
-  border-radius:10px;
-  font-size:16px;
-}
+    .profile small {
+      color: #666;
+    }
 
-button{
-  width:100%;
-  padding:15px;
-  margin-top:12px;
-  border:0;
-  border-radius:10px;
-  background:#111827;
-  color:white;
-  font-size:16px;
-  cursor:pointer;
-}
+    .balance {
+      background: #08752b;
+      color: white;
+      padding: 25px;
+      border-radius: 18px;
+      margin-bottom: 18px;
+    }
 
-.amount{
-  text-align:center;
-  font-size:32px;
-  font-weight:bold;
-  margin:20px 0;
-}
+    .balance h1 {
+      margin-top: 10px;
+      font-size: 34px;
+    }
 
-.details{
-  background:#f1f5f9;
-  padding:20px;
-  border-radius:12px;
-  line-height:2;
-  font-size:16px;
-}
+    .balance p {
+      margin-top: 8px;
+      font-size: 13px;
+    }
 
-.error{
-  color:red;
-  text-align:center;
-  margin-top:12px;
-}
+    .notice {
+      background: #fff8dc;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
 
-.success{
-  display:none;
-  color:green;
-  text-align:center;
-  margin-top:15px;
-  font-weight:bold;
-}
-</style>
+    .buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    button {
+      border: none;
+      padding: 15px;
+      border-radius: 12px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .activate {
+      background: #08752b;
+      color: white;
+    }
+
+    .withdraw {
+      background: #e9f5eb;
+      color: #08752b;
+    }
+
+    .card {
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 16px;
+    }
+
+    .fee {
+      font-size: 28px;
+      color: #d62828;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      margin: 10px 0;
+    }
+
+    .full {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .account-details {
+      background: #eef8ef;
+      padding: 18px;
+      border-radius: 12px;
+      margin-top: 15px;
+      line-height: 1.8;
+    }
+
+    .account-details strong {
+      color: #08752b;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="card">
+<div class="app">
 
-<!-- REGISTER -->
-<div id="register" class="page active">
+  <div class="top">
+    <h2>My Reward App</h2>
+    <span>🔔</span>
+  </div>
 
-<h1>📝 Create Account</h1>
-<p>Register to continue</p>
+  <div class="profile">
+    <small>Welcome</small>
+    <h3>ElBashir Umar Farooq</h3>
+    <small>🟢 Account Active</small>
+  </div>
 
-<input id="name" type="text" placeholder="Full Name">
+  <div class="balance">
+    <small>REWARD BALANCE</small>
+    <h1>₦20,000</h1>
+    <p>Promotional Reward Balance</p>
+  </div>
 
-<input id="email" type="email" placeholder="Email Address">
+  <div class="notice">
+    ℹ️ This is a promotional reward balance. Withdrawal eligibility
+    requires account activation according to the stated terms.
+  </div>
 
-<input id="password" type="password" placeholder="Password">
+  <div class="buttons">
+    <button class="activate" onclick="showActivation()">
+      🔐 Activate Withdrawal
+    </button>
 
-<button onclick="registerUser()">
-Register
-</button>
+    <button class="withdraw" onclick="showWithdrawal()">
+      💸 Withdrawal
+    </button>
+  </div>
+
+  <div id="activation" class="card hidden">
+
+    <h3>Activate Withdrawal</h3>
+
+    <p style="margin-top:10px;">
+      Activation / service fee:
+    </p>
+
+    <div class="fee">₦2,000</div>
+
+    <p style="font-size:13px;color:#666;">
+      The ₦2,000 fee must be clearly displayed before payment.
+    </p>
+
+    <button class="activate full" onclick="showPayment()">
+      Pay ₦2,000
+    </button>
+
+  </div>
+
+  <div id="payment" class="card hidden">
+
+    <h3>Payment Instructions</h3>
+
+    <p style="margin-top:12px;">
+      Send exactly <b>₦2,000</b> to the account details below.
+    </p>
+
+    <div class="account-details">
+
+      <strong>Account Name:</strong><br>
+      Bashar Umar
+
+      <br><br>
+
+      <strong>Account Number:</strong><br>
+      5982626313
+
+      <br><br>
+
+      <strong>Bank:</strong><br>
+      Moniepoint MFB
+
+    </div>
+
+    <p style="margin-top:12px;font-size:13px;color:#666;">
+      After making the transfer, enter your transaction reference.
+    </p>
+
+    <input
+      type="text"
+      id="reference"
+      placeholder="Transaction reference"
+    >
+
+    <button class="activate full" onclick="submitPayment()">
+      Submit Payment Reference
+    </button>
+
+  </div>
+
+  <div id="code" class="card hidden">
+
+    <h3>Enter Activation Code</h3>
+
+    <p style="margin-top:10px;">
+      Enter the activation code provided after payment verification.
+    </p>
+
+    <input
+      type="text"
+      id="activationCode"
+      placeholder="Enter activation code"
+    >
+
+    <button class="activate full" onclick="activateAccount()">
+      Activate Now
+    </button>
+
+    <div id="accountAfterActivation" class="hidden">
+
+      <div class="account-details">
+
+        <h3 style="margin-bottom:10px;">
+          💳 Payment Account
+        </h3>
+
+        <strong>Amount:</strong><br>
+        ₦2,000
+
+        <br><br>
+
+        <strong>Account Name:</strong><br>
+        Bashar Umar
+
+        <br><br>
+
+        <strong>Account Number:</strong><br>
+        5982626313
+
+        <br><br>
+
+        <strong>Bank:</strong><br>
+        Moniepoint MFB
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div id="withdrawal" class="card hidden">
+
+    <h3>Withdrawal</h3>
+
+    <p style="margin-top:10px;">
+      Available reward balance:
+    </p>
+
+    <h2 style="color:#08752b;margin:10px 0;">
+      ₦20,000
+    </h2>
+
+    <input type="text" placeholder="Bank name">
+
+    <input type="text" placeholder="Account number">
+
+    <input type="number" placeholder="Withdrawal amount">
+
+    <button class="activate full">
+      Request Withdrawal
+    </button>
+
+  </div>
 
 </div>
-
-
-<!-- ACTIVATION -->
-<div id="activation" class="page">
-
-<h1>🔐 Activation</h1>
-<p>Enter your activation code</p>
-
-<input
-id="activationCode"
-type="text"
-placeholder="Activation Code">
-
-<button onclick="checkCode()">
-Activate
-</button>
-
-<div id="error" class="error"></div>
-
-</div>
-
-
-<!-- PAYMENT -->
-<div id="payment" class="page">
-
-<h1>💳 Payment</h1>
-
-<p>Activation successful</p>
-
-<div class="amount">
-₦2,000
-</div>
-
-<div class="details">
-
-<b>Account Name:</b><br>
-Bashar Umar
-
-<br>
-
-<b>Account Number:</b><br>
-5982626313
-
-<br>
-
-<b>Bank:</b><br>
-Moniepoint MFB
-
-</div>
-
-<p>
-Please transfer exactly ₦2,000 to the account details above.
-</p>
-
-<button onclick="confirmPayment()">
-I Have Paid
-</button>
-
-<div id="success" class="success">
-✅ Payment submitted successfully.
-</div>
-
-</div>
-
-</div>
-
 
 <script>
 
@@ -186,77 +322,86 @@ const ACTIVATION_CODE =
 "ELBASHIR-2026-UMAR-FAROQ-84721";
 
 
-function showPage(page){
+function showActivation() {
 
-document
-.querySelectorAll(".page")
-.forEach(function(p){
-p.classList.remove("active");
-});
+  document.getElementById("activation")
+    .classList.remove("hidden");
 
-document
-.getElementById(page)
-.classList.add("active");
+  document.getElementById("payment")
+    .classList.add("hidden");
+
+  document.getElementById("code")
+    .classList.add("hidden");
+
+  document.getElementById("withdrawal")
+    .classList.add("hidden");
+}
+
+
+function showPayment() {
+
+  document.getElementById("payment")
+    .classList.remove("hidden");
 
 }
 
 
-function registerUser(){
+function submitPayment() {
 
-const name =
-document.getElementById("name").value.trim();
+  const reference =
+    document.getElementById("reference")
+    .value.trim();
 
-const email =
-document.getElementById("email").value.trim();
+  if (reference === "") {
 
-const password =
-document.getElementById("password").value;
+    alert("Please enter your transaction reference.");
 
-if(!name || !email || !password){
+    return;
+  }
 
-alert("Please complete all registration fields.");
+  alert("Payment reference submitted for verification.");
 
-return;
-
-}
-
-showPage("activation");
-
+  document.getElementById("code")
+    .classList.remove("hidden");
 }
 
 
-function checkCode(){
+function activateAccount() {
 
-const code =
-document
-.getElementById("activationCode")
-.value.trim();
+  const code =
+    document.getElementById("activationCode")
+    .value.trim();
 
-if(code === ACTIVATION_CODE){
+  if (code === "") {
 
-document.getElementById("error").textContent="";
+    alert("Please enter your activation code.");
 
-showPage("payment");
+    return;
+  }
 
-}else{
+  if (code !== ACTIVATION_CODE) {
 
-document.getElementById("error").textContent =
-"Invalid activation code.";
+    alert("Invalid activation code.");
+
+    return;
+  }
+
+  alert("Activation successful.");
+
+  document.getElementById("accountAfterActivation")
+    .classList.remove("hidden");
 
 }
 
-}
 
+function showWithdrawal() {
 
-function confirmPayment(){
-
-document
-.getElementById("success")
-.style.display="block";
+  document.getElementById("withdrawal")
+    .classList.remove("hidden");
 
 }
 
 </script>
 
 </body>
-</html>
+  </html>
