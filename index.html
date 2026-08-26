@@ -371,7 +371,16 @@ if (savedName) {
 
   window.location.href = "login.html";
   }localStorage.removeItem("loggedIn");
+function logout() {
+  localStorage.removeItem("userName");
+  localStorage.removeItem("userEmail");
+  localStorage.removeItem("userPhone");
+  localStorage.removeItem("userPassword");
+  localStorage.removeItem("withdrawalActivated");
+  localStorage.removeItem("loggedIn");
 
+  window.location.href = "login.html";
+  }
 </script>
 
 </body>
