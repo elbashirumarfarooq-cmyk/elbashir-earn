@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>My Account</title>
 
   <style>
@@ -25,35 +26,43 @@
     }
 
     h1 {
-      color: #08752b;
       text-align: center;
+      color: #08752b;
     }
 
-    .card {
-      margin-top: 25px;
-      padding: 20px;
-      border-radius: 16px;
+    .profile {
+      text-align: center;
       background: #eef8ef;
+      padding: 25px;
+      border-radius: 16px;
+      margin-top: 20px;
     }
 
-    .row {
-      padding: 15px 0;
-      border-bottom: 1px solid #d5e5d7;
+    .avatar {
+      font-size: 55px;
     }
 
-    .row:last-child {
-      border-bottom: none;
-    }
-
-    .label {
-      font-size: 13px;
-      color: #666;
-    }
-
-    .value {
-      margin-top: 5px;
+    .name {
+      font-size: 23px;
       font-weight: bold;
-      font-size: 17px;
+      margin-top: 10px;
+    }
+
+    .status {
+      color: #08752b;
+      margin-top: 8px;
+    }
+
+    .item {
+      margin-top: 15px;
+      padding: 16px;
+      background: #f7f7f7;
+      border-radius: 10px;
+    }
+
+    .item strong {
+      display: block;
+      margin-bottom: 5px;
     }
 
     .back {
@@ -74,48 +83,46 @@
 
 <div class="app">
 
-  <h1>My Account</h1>
+  <h1>👤 My Account</h1>
 
-  <div class="card">
+  <div class="profile">
 
-    <div class="row">
-      <div class="label">Full Name</div>
-      <div class="value" id="name">Loading...</div>
+    <div class="avatar">👤</div>
+
+    <div class="name">
+      ElBashir Umar Farooq
     </div>
 
-    <div class="row">
-      <div class="label">Email Address</div>
-      <div class="value" id="email">Loading...</div>
-    </div>
-
-    <div class="row">
-      <div class="label">Phone Number</div>
-      <div class="value" id="phone">Loading...</div>
-    </div>
-
-    <div class="row">
-      <div class="label">Account Status</div>
-      <div class="value">🟢 Active</div>
+    <div class="status">
+      🟢 Account Active
     </div>
 
   </div>
 
-  <a class="back" href="index.html">
-    Back to Dashboard
+  <div class="item">
+    <strong>💰 Reward Balance</strong>
+    ₦20,000
+  </div>
+
+  <div class="item">
+    <strong>🔐 Withdrawal Status</strong>
+    Available for demo withdrawal
+  </div>
+
+  <div class="item">
+    <strong>📋 Transaction History</strong>
+    View your withdrawal requests from the History page.
+  </div>
+
+  <a href="history.html" class="back">
+    📋 View History
+  </a>
+
+  <a href="index.html" class="back">
+    ← Back to Dashboard
   </a>
 
 </div>
-
-<script>
-  document.getElementById("name").textContent =
-    localStorage.getItem("userName") || "Not available";
-
-  document.getElementById("email").textContent =
-    localStorage.getItem("userEmail") || "Not available";
-
-  document.getElementById("phone").textContent =
-    localStorage.getItem("userPhone") || "Not available";
-</script>
 
 </body>
   </html>
