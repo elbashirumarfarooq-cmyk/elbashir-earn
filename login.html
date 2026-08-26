@@ -16,7 +16,7 @@
       background: #f4f7f4;
     }
 
-    .container {
+    .app {
       max-width: 430px;
       min-height: 100vh;
       margin: auto;
@@ -24,10 +24,16 @@
       padding: 25px;
     }
 
-    h1 {
-      color: #08752b;
+    .logo {
       text-align: center;
-      margin-top: 60px;
+      font-size: 45px;
+      margin-top: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #08752b;
+      margin-top: 15px;
     }
 
     .subtitle {
@@ -44,8 +50,8 @@
 
     input {
       width: 100%;
-      padding: 14px;
-      margin-top: 7px;
+      padding: 15px;
+      margin-top: 8px;
       border: 1px solid #ccc;
       border-radius: 10px;
       font-size: 16px;
@@ -63,9 +69,17 @@
       font-weight: bold;
     }
 
+    .message {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 14px;
+      color: #b00020;
+    }
+
     .register {
       text-align: center;
-      margin-top: 22px;
+      margin-top: 25px;
+      color: #666;
     }
 
     .register a {
@@ -78,17 +92,20 @@
 
 <body>
 
-<div class="container">
+<div class="app">
 
-  <h1>Welcome Back!</h1>
+  <div class="logo">🔐</div>
+
+  <h1>Welcome Back</h1>
 
   <p class="subtitle">
-    Login to access your account
+    Login to your My Reward App account
   </p>
 
-  <form onsubmit="login(event)">
+  <form id="loginForm">
 
     <label>Email Address</label>
+
     <input
       type="email"
       id="email"
@@ -97,6 +114,7 @@
     >
 
     <label>Password</label>
+
     <input
       type="password"
       id="password"
@@ -110,6 +128,8 @@
 
   </form>
 
+  <div id="message" class="message"></div>
+
   <div class="register">
     Don't have an account?
     <a href="register.html">Create Account</a>
@@ -118,22 +138,55 @@
 </div>
 
 <script>
-function login(event) {
+
+document.getElementById("loginForm").addEventListener("submit", function(event) {
+
   event.preventDefault();
 
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
+  const email =
+    document.getElementById("email").value.trim();
 
-  const savedEmail = localStorage.getItem("userEmail");
-  const savedPassword = localStorage.getItem("userPassword");
+  const password =
+    document.getElementById("password").value;
+
+  const savedEmail =
+    localStorage.getItem("userEmail");
+
+  const savedPassword =
+    localStorage.getItem("userPassword");
+
+  const message =
+    document.getElementById("message");
+
+  if (!savedEmail || !savedPassword) {
+
+    message.textContent =
+      "No account found. Please create an account first.";
+
+    return;
+  }
 
   if (email === savedEmail && password === savedPassword) {
+
     localStorage.setItem("loggedIn", "true");
-    window.location.href = "index.html";
+
+    message.style.color = "#08752b";
+    message.textContent = "Login successful...";
+
+    setTimeout(function() {
+      window.location.href = "index.html";
+    }, 500);
+
   } else {
-    alert("Incorrect email or password.");
+
+    message.textContent =
+      "Incorrect email or password.";
+
   }
-}ooscript>
+
+});
+
+</script>
 
 </body>
-</html>
+  </html>
