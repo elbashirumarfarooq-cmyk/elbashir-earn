@@ -1,144 +1,5 @@
-<script src="https://js.paystack.co/v2/inline.js"></script>!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Activate Withdrawal</title>
-
-  <script src="https://js.paystack.co/v2/inline.js"></script>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
-
-    body {
-      margin: 0;
-      background: #f4f7f4;
-    }
-
-    .app {
-      max-width: 430px;
-      min-height: 100vh;
-      margin: auto;
-      background: white;
-      padding: 25px;
-    }
-
-    h1 {
-      color: #08752b;
-      text-align: center;
-      margin-top: 30px;
-    }
-
-    .card {
-      margin-top: 25px;
-      padding: 22px;
-      border-radius: 16px;
-      background: #eef8ef;
-      text-align: center;
-    }
-
-    .fee {
-      font-size: 32px;
-      font-weight: bold;
-      color: #08752b;
-      margin: 15px 0;
-    }
-
-    .info {
-      color: #555;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    input {
-      width: 100%;
-      padding: 14px;
-      margin-top: 18px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      font-size: 16px;
-    }
-
-    button {
-      width: 100%;
-      padding: 15px;
-      margin-top: 15px;
-      border: none;
-      border-radius: 10px;
-      background: #08752b;
-      color: white;
-      font-weight: bold;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    .back {
-      display: block;
-      text-align: center;
-      margin-top: 20px;
-      color: #08752b;
-      text-decoration: none;
-    }
-  </style>
-</head>
-
-<body>
-
-<div class="app">
-
-  <h1>🔐 Activate Withdrawal</h1>
-
-  <div class="card">
-
-    <div class="info">
-      Withdrawal activation fee
-    </div>
-
-    <div class="fee">₦2,000</div>
-
-    <div class="info">
-      This is a test payment. No real money should be used.
-    </div>
-
-    <input
-      type="email"
-      id="email"
-      placeholder="Enter your email"
-    >
-
-    <button onclick="startPayment()">
-      💳 Continue to Payment
-    </button>
-
-  </div>
-
-  <a class="back" href="index.html">
-    ← Back to Dashboard
-  </a>
-
-</div>
-
-<script>
-
+<script src="https://js.paystack.co/v2/inline.js"></script><script>
 function startPayment() {
-
-  const email =
-    document.getElementById("email").value.trim();
-
-  if (!email) {
-    alert("Please enter your email.");
-    return;
-  }
-
-  if (!window.PaystackPop) {
-    alert("Paystack could not load. Please refresh the page.");
-    return;
-  }
-
-  function startPayment() {
 
   const email = document.getElementById("email").value.trim();
 
@@ -148,68 +9,25 @@ function startPayment() {
   }
 
   if (typeof PaystackPop === "undefined") {
-    alert("Paystack is not loaded. Please refresh the page.");
+    alert("Paystack has not loaded. Refresh the page and try again.");
     return;
   }
 
-  const popup = new PaystackPop();
+  const paystack = new PaystackPop();
 
-  popup.newTransaction({
-    key: "pk_test_1d46ca8bee80942378ee5558fcbc3f9b6dc4e805
+  paystack.newTransaction({
+    key: "pk_test_1d46ca8bee80942378ee5558fcbc3f9b6dc4e805",
     email: email,
     amount: 200000,
     currency: "NGN",
 
     onSuccess: function(transaction) {
-      alert(
-        "Test payment successful.\nReference: " +
-        transaction.reference
-      );
-
-      window.location.href =
-        "verify.html?reference=" +
-        encodeURIComponent(transaction.reference);
+      alert("Test payment successful: " + transaction.reference);
     },
 
     onCancel: function() {
       alert("Payment cancelled.");
     }
   });
-  }
-
-  popup.newTransaction({
-
-    key: "pk_test_1d46ca8bee80942378ee5558fcbc3f9b6dc4e805
-
-    email: email,
-
-    amount: 200000,
-
-    currency: "NGN",
-
-    onSuccess: function(transaction) {
-
-      alert(
-        "Test payment completed. Reference: " +
-        transaction.reference
-      );
-
-      window.location.href =
-        "verify.html?reference=" +
-        encodeURIComponent(transaction.reference);
-    },
-
-    onCancel: function() {
-
-      alert("Payment was cancelled.");
-
-    }
-
-  });
-
 }
-
-</script>
-
-</body>
-</html>
+    </script>
